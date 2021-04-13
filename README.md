@@ -9,7 +9,7 @@ This is a Serverless Flask application with basic features that many apps would 
 
 If you want to program in Python, and use Serverless, then Flask is a good choice because it's lightweight.  It transitions well from the original purpose as a server which is constantly running and handles everything, to becoming a micro-service with a small area of concern that's quickly spun up when needed and then shut down.  
 
-[Here's a slightly different tutorial for reference.](https://www.serverless.com/blog/flask-python-rest-api-serverless-lambda-dynamodb)
+[Here's another Serverless Flask tutorial for reference.](https://www.serverless.com/blog/flask-python-rest-api-serverless-lambda-dynamodb)
 
 ## Prerequisites
 
@@ -19,13 +19,15 @@ To interact with it you'll need an API client like [Postman](https://www.postman
 
 ## What this app does
 
-It's expecting an http get request.  It will be a json request so it needs the header `Content-Type application/json`, and the request body has the form:
+It's expecting an HTTP POST request.  It will be a JSON request so it needs the header `Content-Type application/json`, and the request body has the form:
 
 ```
 {
     "name": "<your name>"
 }
 ```
+
+Note for if you're planning to change it to receive a GET request: HTTP POST requests have a body, but HTTP GET requests are not supposed to have a body.  If you want to add data to a GET request, you are limited to adding it as a url encoded [query string](https://en.wikipedia.org/wiki/Query_string).  I am not using GraphQL in this app, but this [GraphQL documentation](https://graphql.org/learn/serving-over-http/#get-request) gives an example of this general practice.
 
 In my mongo database there's a people collection with a document having the property `name: "Greg"`.  When it finds a name it its people collection that matches the request, this app will respond with:
 
